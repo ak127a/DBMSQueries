@@ -1,9 +1,12 @@
 !--------------------ORDER DATABASE--------------------!
 
 1.
-select count(customer_id) 
-from customer 
-where grade > (select avg(grade) from customer c1 where c1.city="Bangalore");
+SELECT GRADE, COUNT (DISTINCT CUSTOMER_ID) 
+FROM CUSTOMER1
+GROUP BY GRADE
+HAVING GRADE > (SELECT AVG(GRADE) 
+FROM CUSTOMER1
+WHERE CITY='BANGALORE');
 
 2.
 select s.salesman_id , s.name 
