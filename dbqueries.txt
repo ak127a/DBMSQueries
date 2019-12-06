@@ -59,3 +59,36 @@ update rating
 set rev_stars = 5
 where mov_id in
 (select mov_id from movies where dir_id in (select dir_id from director where dir_name="Akshat"));
+
+
+
+
+!--------------------COLLEGE DATABASE--------------------!
+
+2.
+select ss.sem , ss.sec, s.gender , count(s.gender) as count 
+from student s , semsec ss , class c 
+where c.usn = s.usn  
+and ss.ssid = c.ssid 
+group by ss.sem , ss.sec , s.gender 
+order by sem;
+
+
+3.
+create view 1marks as (select t1 , sub_code from iamarks where usn=1);
+
+5.
+select s.usn , s.name , 
+(case when ia.finalia between 17 and 20 then 'outstanding' when ia.finalia between 12 and 16 then 'avg' else 'weak') as category 
+from student s , semsec ss , iamarks ia 
+where s.usn = ia.usn and ss.ssid = ia.ssid and ss.sem = 4;
+
+
+!--------------------COMPANY DATABASE--------------------!
+
+4.
+select distinct(e.name) 
+from employee as e,works_on w 
+where w.ssn=e.ssn and not exists
+(select pno from project where dno=5 and 
+pno not in(select pno from works_on where e.ssn=ssn));
